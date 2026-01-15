@@ -17,16 +17,16 @@ if(navigator.geolocation){
 const map = L.map("map").setView([0,0],16);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-    attribution: "Akhshat's World"
+    attribution: "© Akhshat Sharma"
 }).addTo(map);
 
 const markers = {};
 
 socket.on("receive-location",(data)=>{
     const {id,latitude,longitude} = data;
-    map.setView([latitude,longitude],);
+    map.setView([latitude,longitude]);
     if(markers[id]){
-        markers[id].setLatLang([latitude,longitude]);
+        markers[id].setLatLng([latitude,longitude]);
     }
     else{
         markers[id] = L.marker([latitude,longitude]).addTo(map);

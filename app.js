@@ -7,8 +7,15 @@ const http = require("http");
 const socketio = require("socket.io");
 
 const server = http.createServer(app);
+const PORT = process.env.PORT || 3000;
 
-const io = socketio(server);
+const io = socketio(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
+
 
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
@@ -18,7 +25,7 @@ io.on("connection",function(socket){
         io.emit("receive-location",{id:socket.id, ...data});
     });
     socket.on("disconnect",function(){
-        io.emit("user-disconected",socket.id);
+        io.emit("user-disconnected",socket.id);
     });
 });
 
@@ -26,4 +33,6 @@ app.get("/",function(req,res){
     res.render("index");
 });
 
-server.listen(3000);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
