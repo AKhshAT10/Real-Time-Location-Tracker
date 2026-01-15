@@ -1,11 +1,11 @@
 {
-  "name": "real-time-location-project",
+  "name": "real-time-location-tracker",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "type": "commonjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+ "scripts": {
+  "start": "node app.js"
   },
   "keywords": [],
   "author": "",
